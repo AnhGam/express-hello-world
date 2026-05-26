@@ -36,9 +36,11 @@ jobs:
         run: |
           echo "Thành công!"
           echo "### :white_check_mark: Pipeline Succeeded!" >> $GITHUB_STEP_SUMMARY
+          curl -H "Content-Type: application/json" -d '{"content": "**Thành công:** CI Pipeline dự án Express đã chạy thành công!"}' ${{ secrets.DISCORD_WEBHOOK }}
           
       - name: Notify on Failure
         if: failure()
         run: |
           echo "Thất bại!"
           echo "### :x: Pipeline Failed!" >> $GITHUB_STEP_SUMMARY
+          curl -H "Content-Type: application/json" -d '{"content": "**Thất bại:** CI Pipeline dự án Express đã gặp lỗi rùi!"}' ${{ secrets.DISCORD_WEBHOOK }}
